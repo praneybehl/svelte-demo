@@ -1,0 +1,44 @@
+<AwesomeHeader title='{{title}}' />
+<ul class="people-list">
+  {{#each users as user}}
+    <li>{{user.name}}</li>
+  {{/each}}
+</ul>
+{{#if done}}
+  <p>clicked and held</p>
+{{/if}}
+<button on:longpress='set({ done: true })'
+        on:click='set({title: "more awesome " + title })'>
+        make title more awesome
+</button>
+
+<script>
+  import AwesomeHeader from './AwesomeHeader.html'
+  export default {
+    components: {
+      AwesomeHeader
+    },
+    events: {
+      longpress ( node, callback ) {
+        function onmousedown ( event ) {
+          const timeout = setTimeout( () => callback( event ), 1000 );
+
+          function cancel () {
+            clearTimeout( timeout );
+            node.removeEventListener( 'mouseup', cancel, false );
+          }
+
+          node.addEventListener( 'mouseup', cancel, false );
+        }
+
+        node.addEventListener( 'mousedown', onmousedown, false );
+
+        return {
+          teardown () {
+            node.removeEventListener( 'mousedown', onmousedown, false );
+          }
+        };
+      }
+    }
+  };
+</script>

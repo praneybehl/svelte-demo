@@ -1,0 +1,21 @@
+{
+  "name": "svelte-starter",
+  "version": "0.1.0",
+  "description": "Prototype Home Assistant UI in Svelte",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "watch": "rollup --watch -c rollup.config.js",
+    "start": "npm run watch & http-server -p 9876 -o"
+  },
+  "author": "Benjamin P Verble",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.9.0",
+    "rollup": "^0.36.4",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-svelte": "^1.0.0",
+    "svelte-cli": "^1.0.2",
+    "rollup-watch": "^2.5.0"
+  }
+}
